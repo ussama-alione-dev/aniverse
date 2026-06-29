@@ -1,5 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
-
 /* @custom-variant dark (&:is(.dark *)); */
 
 :root {
@@ -38,6 +38,7 @@
     --font-sans: Inter, ui-sans-serif, sans-serif, system-ui;
     --font-serif: Noto Serif Georgian, ui-serif, serif;
     --font-mono: JetBrains Mono, ui-monospace, monospace;
+    --font-rajdhani: "Rajdhani", ui-sans-serif, sans-serif, system-ui;
     --radius: 0.5rem;
     --shadow-x: 0;
     --shadow-y: 1px;
@@ -157,6 +158,7 @@
     --font-sans: var(--font-sans);
     --font-mono: var(--font-mono);
     --font-serif: var(--font-serif);
+    --font-rajdhani: var(--font-rajdhani);
 
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
@@ -180,4 +182,8 @@
     body {
         @apply bg-background text-foreground;
     }
+}
+
+header nav a.active {
+    @apply text-primary underline;
 }
