@@ -1,7 +1,17 @@
 import React from "react";
+import { useEffect } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
 import Button from "../ui/components/Button";
+import { fetchTrendingAnime } from "../store/features/animeThunk";
 
 const Home = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchTrendingAnime());
+    }, []);
+
     return (
         <div className="min-h-screen mt-14 md:mt-20">
             <section className="flex flex-col bg-no-repeat bg-[url('/hero.png')] w-full h-screen items-start justify-center =">
