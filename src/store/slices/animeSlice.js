@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchTrendingAnime } from "../features/animeThunk";
+import { fetchTrendingAnime, fetchSeasonalAnime } from "../features/animeThunk";
 
 const initialState = {
     trendingAnime: [],
-    loading: false,
-    error: null,
+    seasonalAnime: [],
+    TopAnimeLoading: false,
+    SeasonalAnimeLoading: false,
+
+    TopAnimeError: null,
+    SeasonalAnimeError: null,
 };
 
 const animeSlice = createSlice({
@@ -14,16 +18,28 @@ const animeSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchTrendingAnime.pending, (state) => {
-            state.loading = true;
-            state.error = null;
+            state.TopAnimeLoading = true;
+            state.TopAnimeError = null;
         });
         builder.addCase(fetchTrendingAnime.fulfilled, (state, action) => {
-            state.loading = false;
+            state.TopAnimeLoading = false;
             state.trendingAnime = action.payload;
         });
         builder.addCase(fetchTrendingAnime.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.payload;
+            state.TopAnimeLoading = false;
+            state.TopAnimeError = action.payload;
+        });
+        builder.addCase(fetchSeasonalAnime.pending, (state) => {
+            state.SeasonalAnimeLoading = true;
+            state.SeasonalAnimeError = null;
+        });
+        builder.addCase(fetchSeasonalAnime.fulfilled, (state, action) => {
+            state.SeasonalAnimeLoading = false;
+            state.seasonalAnime = action.payload;
+        });
+        builder.addCase(fetchSeasonalAnime.rejected, (state, action) => {
+            state.SeasonalAnimeLoading = false;
+            state.SeasonalAnimeError = action.payload;
         });
     },
 });
