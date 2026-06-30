@@ -22,9 +22,6 @@ const Home = () => {
         SeasonalAnimeError,
     } = useSelector((state) => state.anime);
 
-    console.log("trendingAnime", trendingAnime);
-    console.log("seasonalAnime", seasonalAnime);
-
     useEffect(() => {
         dispatch(fetchSeasonalAnime());
         dispatch(fetchTrendingAnime());

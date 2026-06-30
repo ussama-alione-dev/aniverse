@@ -4,6 +4,7 @@ import Navbar from "./ui/components/Navbar";
 import Footer from "./ui/components/Footer";
 import MainLayout from "./ui/layout/MainLayout";
 import Home from "./pages/Home";
+import Anime from "./pages/Anime";
 
 const App = () => {
     return (
@@ -13,7 +14,7 @@ const App = () => {
                 <Route>
                     <Route path="/" element={<Home />} />
 
-                    <Route path="/anime" element={<div>anime page</div>} />
+                    <Route path="/anime" element={<Anime />} />
                     <Route
                         path="/anime/:id"
                         element={<div>anime detail page</div>}
