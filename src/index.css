@@ -1,6 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rajdhani:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
-/* @custom-variant dark (&:is(.dark *)); */
+@custom-variant dark (&:is(.dark *));
 
 :root {
     --background: #fafafa;
@@ -39,6 +40,9 @@
     --font-serif: Noto Serif Georgian, ui-serif, serif;
     --font-mono: JetBrains Mono, ui-monospace, monospace;
     --font-rajdhani: "Rajdhani", ui-sans-serif, sans-serif, system-ui;
+    --font-anton: "Anton", ui-sans-serif, sans-serif, system-ui;
+    --font-inter: "Inter", ui-sans-serif, sans-serif, system-ui;
+
     --radius: 0.5rem;
     --shadow-x: 0;
     --shadow-y: 1px;
@@ -159,6 +163,7 @@
     --font-mono: var(--font-mono);
     --font-serif: var(--font-serif);
     --font-rajdhani: var(--font-rajdhani);
+    --font-inter: var(--font-inter);
 
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
@@ -177,7 +182,7 @@
 
 @layer base {
     * {
-        @apply border-border outline-ring/50;
+        @apply border-border font-inter outline-ring/50;
     }
     body {
         @apply bg-background text-foreground;

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./ui/components/Navbar";
 import Footer from "./ui/components/Footer";
 import MainLayout from "./ui/layout/MainLayout";
+import Home from "./pages/Home";
 
 const App = () => {
     return (
@@ -10,7 +11,7 @@ const App = () => {
             <Navbar />
             <Routes element={<MainLayout />}>
                 <Route>
-                    <Route path="/" element={<div>Home Page</div>} />
+                    <Route path="/" element={<Home />} />
 
                     <Route path="/anime" element={<div>anime page</div>} />
                     <Route
