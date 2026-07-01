@@ -1,6 +1,18 @@
-import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllAnime } from "../store/features/animeThunk";
+import { useEffect } from "react";
 
 const Anime = () => {
+    const dispatch = useDispatch();
+    const { allAnime, allAnimeLoading, allAnimeError } = useSelector(
+        (state) => state.anime,
+    );
+
+    useEffect(() => {
+        // Dispatch an action to fetch all anime data when the component mounts
+        dispatch(getAllAnime());
+    }, []);
+
     return (
         <div className="min-h-screen md:px-40 px-8 mt-24 md:mt-32 ">
             <h1 className="md:text-6xl text-xl uppercase font-bold mb-4 ">
@@ -29,6 +41,36 @@ const Anime = () => {
                     </select>
                 </div>
             </div>
+
+            <section>
+                {allAnimeLoading ? (
+                    <div className="w-full h-96 flex items-center justify-center">
+                        <p className="text-muted-foreground/70">Loading...</p>
+                    </div>
+                ) : allAnimeError ? (
+                    <div className="w-full h-96 flex items-center justify-center">
+                        <p className="text-muted-foreground/70">
+                            {allAnimeError}
+                        </p>
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {allAnime.map((anime) => (
+                            <div
+                                key={anime.mal_id}
+                                className="bg-card border p-4 border-input"
+                            >
+                                <h2 className="text-lg font-bold">
+                                    {anime.title}
+                                </h2>
+                                <p className="text-muted-foreground/70">
+                                    {anime.synopsis}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </section>
         </div>
     );
 };

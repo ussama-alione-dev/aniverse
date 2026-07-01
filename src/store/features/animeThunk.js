@@ -1,6 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/axios";
 
+export const getAllAnime = createAsyncThunk(
+    "anime/getAllAnime",
+    async (_, thunkAPI) => {
+        try {
+            const response = await api.get("/anime");
+            console.log("All Anime Response:", response.data.data); // Log the response data for debugging
+            return response.data.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data || error.message,
+            );
+        }
+    },
+);
+
 export const fetchTrendingAnime = createAsyncThunk(
     "anime/fetchTrendingAnime",
     async (_, thunkAPI) => {
