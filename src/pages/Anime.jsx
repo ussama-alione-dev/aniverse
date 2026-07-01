@@ -1,6 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { getAllAnime } from "../store/features/animeThunk";
 import { useEffect } from "react";
+import AnimeCard from "../ui/components/AnimeCard";
+import ErrorMessage from "../ui/components/ErrorMessage";
+import { animes } from "../data/StaticData";
+import { replaceAnimesWithStaticData } from "../store/slices/animeSlice";
 
 const Anime = () => {
     const dispatch = useDispatch();
@@ -9,8 +13,10 @@ const Anime = () => {
     );
 
     useEffect(() => {
-        // Dispatch an action to fetch all anime data when the component mounts
         dispatch(getAllAnime());
+        if (!allAnimeError || allAnimeError.status !== 429) {
+            dispatch(replaceAnimesWithStaticData(animes));
+        }
     }, []);
 
     return (
@@ -48,25 +54,17 @@ const Anime = () => {
                         <p className="text-muted-foreground/70">Loading...</p>
                     </div>
                 ) : allAnimeError ? (
-                    <div className="w-full h-96 flex items-center justify-center">
-                        <p className="text-muted-foreground/70">
-                            {allAnimeError}
-                        </p>
-                    </div>
+                    <ErrorMessage message={allAnimeError.message} />
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {allAnime.map((anime) => (
-                            <div
+                    <div className="grid mt-6 md:mt-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                        {allAnime.map((anime, ndx) => (
+                            <AnimeCard
+                                ndx={ndx}
                                 key={anime.mal_id}
-                                className="bg-card border p-4 border-input"
-                            >
-                                <h2 className="text-lg font-bold">
-                                    {anime.title}
-                                </h2>
-                                <p className="text-muted-foreground/70">
-                                    {anime.synopsis}
-                                </p>
-                            </div>
+                                anime={anime}
+                                episodes={true}
+                                year={true}
+                            />
                         ))}
                     </div>
                 )}

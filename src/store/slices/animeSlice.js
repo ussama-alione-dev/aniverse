@@ -23,7 +23,11 @@ const initialState = {
 const animeSlice = createSlice({
     name: "anime",
     initialState,
-    reducers: {},
+    reducers: {
+        replaceAnimesWithStaticData: (state, action) => {
+            state.allAnime = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         // trending anime
         builder.addCase(fetchTrendingAnime.pending, (state) => {
@@ -68,3 +72,4 @@ const animeSlice = createSlice({
 });
 
 export default animeSlice.reducer;
+export const { replaceAnimesWithStaticData } = animeSlice.actions;

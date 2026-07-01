@@ -8,7 +8,9 @@ import {
     fetchSeasonalAnime,
 } from "../store/features/animeThunk";
 import { Link } from "react-router-dom";
+
 import AnimeCard from "../ui/components/AnimeCard";
+import ErrorMessage from "../ui/components/ErrorMessage";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -61,7 +63,12 @@ const Home = () => {
                 {TopAnimeLoading ? (
                     <p>Loading trending anime...</p>
                 ) : TopAnimeError ? (
-                    <p>Error fetching trending anime</p>
+                    <ErrorMessage
+                        message={
+                            TopAnimeError.message ||
+                            "An error occurred while fetching trending anime."
+                        }
+                    />
                 ) : (
                     <div className="grid grid-cols-2 md:grid-cols-6 ">
                         {trendingAnime.map((anime, ndx) => (
@@ -87,7 +94,12 @@ const Home = () => {
                 {SeasonalAnimeLoading ? (
                     <p>Loading seasonal anime...</p>
                 ) : SeasonalAnimeError ? (
-                    <p>Error fetching seasonal anime</p>
+                    <ErrorMessage
+                        message={
+                            SeasonalAnimeError.message ||
+                            "An error occurred while fetching seasonal anime."
+                        }
+                    />
                 ) : (
                     <div className="grid grid-cols-2 md:grid-cols-6 ">
                         {seasonalAnime.map((anime, ndx) => (
