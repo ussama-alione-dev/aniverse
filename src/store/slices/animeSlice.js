@@ -4,20 +4,24 @@ import {
     fetchTrendingAnime,
     fetchSeasonalAnime,
     getAllAnime,
+    fetchAnimeDetails,
 } from "../thunks/animeThunk";
 
 const initialState = {
     allAnime: [],
     trendingAnime: [],
     seasonalAnime: [],
+    animeDetails: null,
 
     TopAnimeLoading: false,
     SeasonalAnimeLoading: false,
     allAnimeLoading: false,
+    animeDetailsLoading: false,
 
     TopAnimeError: null,
     SeasonalAnimeError: null,
     allAnimeError: null,
+    animeDetailsError: null,
 };
 
 const animeSlice = createSlice({
@@ -67,6 +71,20 @@ const animeSlice = createSlice({
         builder.addCase(getAllAnime.rejected, (state, action) => {
             state.allAnimeLoading = false;
             state.allAnimeError = action.payload;
+        });
+
+        // anime details
+        builder.addCase(fetchAnimeDetails.pending, (state) => {
+            state.animeDetailsLoading = true;
+            state.animeDetailsError = null;
+        });
+        builder.addCase(fetchAnimeDetails.fulfilled, (state, action) => {
+            state.animeDetailsLoading = false;
+            state.animeDetails = action.payload;
+        });
+        builder.addCase(fetchAnimeDetails.rejected, (state, action) => {
+            state.animeDetailsLoading = false;
+            state.animeDetailsError = action.payload;
         });
     },
 });

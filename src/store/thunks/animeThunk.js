@@ -46,3 +46,18 @@ export const fetchSeasonalAnime = createAsyncThunk(
         }
     },
 );
+
+export const fetchAnimeDetails = createAsyncThunk(
+    "anime/fetchAnimeDetails",
+    async (animeId, thunkAPI) => {
+        try {
+            const response = await api.get(`/anime/${animeId}`);
+
+            return response.data.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data || error.message,
+            );
+        }
+    },
+);
