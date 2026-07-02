@@ -5,7 +5,7 @@ import { Hamburger, Menu, X } from "lucide-react";
 const NAVLINKS = [
     { to: "/anime", label: "Anime" },
     { to: "/characters", label: "Characters" },
-    { to: "/favourites", label: "Favourites" },
+    { to: "/favorites", label: "Favorites" },
     { to: "/my-ratings", label: "My Ratings" },
     { to: "/my-library", label: "My Library" },
 ];

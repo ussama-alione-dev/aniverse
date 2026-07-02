@@ -31,3 +31,28 @@ export const addToFavorite = createAsyncThunk(
         }
     },
 );
+
+export const removeFromFavorite = createAsyncThunk(
+    "favorites/remove",
+    async (animeId, { rejectWithValue }) => {
+        try {
+            await localApi.delete(`/favorites/${animeId}`);
+            return animeId;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    },
+);
+
+export const fetchFavorites = createAsyncThunk(
+    "favorites/fetch",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await localApi.get("/favorites");
+            console.log(response.data, "response.data");
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    },
+);

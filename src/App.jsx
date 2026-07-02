@@ -6,6 +6,7 @@ import MainLayout from "./ui/layout/MainLayout";
 import Home from "./pages/Home";
 import Anime from "./pages/Anime";
 import AnimeDetails from "./pages/AnimeDetails";
+import Favorites from "./pages/Favorites";
 
 const App = () => {
     return (
@@ -31,10 +32,7 @@ const App = () => {
                         element={<div>character detail page</div>}
                     />
 
-                    <Route
-                        path="/favourites"
-                        element={<div> favourites page</div>}
-                    />
+                    <Route path="/favorites" element={<Favorites />} />
                     <Route
                         path="/my-ratings"
                         element={<div> my ratings page</div>}

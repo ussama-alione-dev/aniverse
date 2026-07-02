@@ -15,6 +15,8 @@ import GenreTag from "../ui/components/GenreTag";
 
 import Button from "../ui/components/Button";
 import AddToFavorites from "../ui/components/AddToFavorites";
+import AnimeDetailsSkeleton from "../ui/components/AnimeDetailsSkeleton";
+import ErrorMessage from "../ui/components/ErrorMessage";
 
 const AnimeDetails = () => {
     const { id } = useParams();
@@ -30,19 +32,11 @@ const AnimeDetails = () => {
     }, [dispatch, id]);
 
     if (animeDetailsLoading) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                Loading...
-            </div>
-        );
+        <AnimeDetailsSkeleton />;
     }
 
     if (animeDetailsError) {
-        return (
-            <div className="min-h-screen flex items-center justify-center text-red-500">
-                {animeDetailsError.message}
-            </div>
-        );
+        <ErrorMessage animeDetailsError={animeDetailsError.message} />;
     }
 
     if (!animeDetails) return null;
