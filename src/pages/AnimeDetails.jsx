@@ -14,6 +14,7 @@ import {
 import GenreTag from "../ui/components/GenreTag";
 
 import Button from "../ui/components/Button";
+import AddToFavorites from "../ui/components/AddToFavorites";
 
 const AnimeDetails = () => {
     const { id } = useParams();
@@ -107,8 +108,8 @@ const AnimeDetails = () => {
                         </div>
 
                         <div className="flex flex-wrap gap-2">
-                            {genres?.map((genre) => (
-                                <GenreTag genre={genre} />
+                            {genres?.map((genre, ndx) => (
+                                <GenreTag key={ndx} genre={genre} />
                             ))}
                         </div>
 
@@ -154,13 +155,7 @@ const AnimeDetails = () => {
 
                         {/* Buttons */}
                         <div className="flex flex-wrap gap-4">
-                            <Button
-                                variant="ghost"
-                                className="flex font-rajdhani items-center gap-2"
-                            >
-                                <Star size={18} />
-                                Add to Favorites
-                            </Button>
+                            <AddToFavorites anime={animeDetails} />
 
                             <Button
                                 variant="ghost"

@@ -2,8 +2,10 @@ import React from "react";
 import clsx from "clsx";
 
 const Button = ({
+    type = "button",
     children,
     variant = "primary",
+    onClick,
     className = "",
     ...props
 }) => {
@@ -18,6 +20,8 @@ const Button = ({
 
     return (
         <button
+            type={type}
+            onClick={onClick}
             className={clsx(
                 "inline-flex uppercase font-rajdhani cursor-pointer items-center justify-center  px-6 py-3 font-medium transition-colors duration-200 disabled:opacity-50 disabled:pointer-events-none",
                 variants[variant],
