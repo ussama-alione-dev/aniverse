@@ -25,11 +25,13 @@ const AnimeCard = ({ anime, ndx, episodes, year }) => {
 
             <div className="flex items-center mt-2">
                 {episodes && (
-                    <span className="text-muted-foreground/50 uppercase font-rajdhani p-1 text-xs right-20 ">
-                        {anime.episodes} EP
-                    </span>
+                    <>
+                        <span className="text-muted-foreground/50 uppercase font-rajdhani p-1 text-xs right-20 ">
+                            {anime.episodes} EP
+                        </span>
+                        <Dot size={10} />
+                    </>
                 )}
-                <Dot size={10} />
                 {year && (
                     <span className="text-muted-foreground/50 uppercase font-rajdhani p-1 text-xs right-20 ">
                         {anime.year}

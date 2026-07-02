@@ -32,7 +32,7 @@ const Home = () => {
 
     return (
         <div className="min-h-screen mt-14 md:mt-20">
-            <section className="flex p-4 flex-col bg-no-repeat bg-[url('/hero.png')] w-full h-screen items-start justify-center =">
+            <section className="flex p-4 px-28 flex-col bg-no-repeat bg-[url('/hero.png')] w-full h-screen items-start justify-center =">
                 <h1 className="md:text-8xl text-4xl font-bold uppercase text-foreground ">
                     Your personal <br />{" "}
                     <span className="text-primary"> anime </span>
@@ -43,7 +43,7 @@ const Home = () => {
                     you <br /> love and curate a watch list that follows you
                     across devices
                 </p>
-                <div className="flex flex-col md:flex-row w-full items-center md:items-start gap-4 mt-6">
+                <div className="flex flex-col md:flex-row w-full items-center md:items-start gap-4 mt-10">
                     <Button variant="secondary">explore anime</Button>
                     <Button variant="ghost"> + open library</Button>
                 </div>
