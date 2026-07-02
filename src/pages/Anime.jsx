@@ -9,12 +9,16 @@ import SearchAnimeInput from "../ui/components/SearchAnimeInput";
 import { useState } from "react";
 import EmptyState from "../ui/components/EmptyState";
 import { Search } from "lucide-react";
+import GenreSelect from "../ui/components/GenreSelect";
+import TypeSelect from "../ui/components/TypeSelect";
 
 const Anime = () => {
+    const dispatch = useDispatch();
+
+    const [genre, setGenre] = useState("");
+    const [type, setType] = useState("");
     const [query, setQuery] = useState("");
     const [debouncedQuery, setDebouncedQuery] = useState("");
-
-    const dispatch = useDispatch();
 
     const { allAnime, allAnimeLoading, allAnimeError } = useSelector(
         (state) => state.anime,
@@ -29,11 +33,11 @@ const Anime = () => {
     }, [query]);
 
     useEffect(() => {
-        dispatch(getAllAnime(query));
+        dispatch(getAllAnime({ query, genre, type }));
         if (!allAnimeError || allAnimeError.status !== 429) {
             dispatch(replaceAnimesWithStaticData(animes));
         }
-    }, [debouncedQuery]);
+    }, [debouncedQuery, genre, type]);
 
     return (
         <div className="min-h-screen md:px-40 px-8 mt-24 md:mt-32 ">
@@ -47,16 +51,8 @@ const Anime = () => {
             <div className="mt-4 md:mt-8 w-full flex md:flex-row flex-col items-center gap-2">
                 <SearchAnimeInput query={query} setQuery={setQuery} />
                 <div className="flex w-full md:flex-row flex-col gap-2">
-                    <select className="bg-background uppercase border p-3 border-input focus:outline focus:outline-primary">
-                        <option value="" className="text-muted-foreground/70">
-                            all types
-                        </option>
-                    </select>
-                    <select className="bg-background uppercase border p-3 border-input focus:outline focus:outline-primary">
-                        <option value="" className="text-muted-foreground/70">
-                            all genres
-                        </option>
-                    </select>
+                    <TypeSelect type={type} setType={setType} />
+                    <GenreSelect genre={genre} setGenre={setGenre} />
                 </div>
             </div>
 
