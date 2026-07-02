@@ -4,7 +4,7 @@ import {
     fetchTrendingAnime,
     fetchSeasonalAnime,
     getAllAnime,
-} from "../features/animeThunk";
+} from "../thunks/animeThunk";
 
 const initialState = {
     allAnime: [],

@@ -6,7 +6,7 @@ import Button from "../ui/components/Button";
 import {
     fetchTrendingAnime,
     fetchSeasonalAnime,
-} from "../store/features/animeThunk";
+} from "../store/thunks/animeThunk";
 import { Link } from "react-router-dom";
 
 import AnimeCard from "../ui/components/AnimeCard";

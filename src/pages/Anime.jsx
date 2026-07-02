@@ -1,23 +1,39 @@
 import { useSelector, useDispatch } from "react-redux";
-import { getAllAnime } from "../store/features/animeThunk";
+import { getAllAnime } from "../store/thunks/animeThunk";
 import { useEffect } from "react";
 import AnimeCard from "../ui/components/AnimeCard";
 import ErrorMessage from "../ui/components/ErrorMessage";
 import { animes } from "../data/StaticData";
 import { replaceAnimesWithStaticData } from "../store/slices/animeSlice";
+import SearchAnimeInput from "../ui/components/SearchAnimeInput";
+import { useState } from "react";
+import EmptyState from "../ui/components/EmptyState";
+import { Search } from "lucide-react";
 
 const Anime = () => {
+    const [query, setQuery] = useState("");
+    const [debouncedQuery, setDebouncedQuery] = useState("");
+
     const dispatch = useDispatch();
+
     const { allAnime, allAnimeLoading, allAnimeError } = useSelector(
         (state) => state.anime,
     );
 
     useEffect(() => {
-        dispatch(getAllAnime());
+        const timeout = setTimeout(() => {
+            setDebouncedQuery(query);
+        }, 500);
+
+        return () => clearTimeout(timeout);
+    }, [query]);
+
+    useEffect(() => {
+        dispatch(getAllAnime(query));
         if (!allAnimeError || allAnimeError.status !== 429) {
             dispatch(replaceAnimesWithStaticData(animes));
         }
-    }, []);
+    }, [debouncedQuery]);
 
     return (
         <div className="min-h-screen md:px-40 px-8 mt-24 md:mt-32 ">
@@ -29,11 +45,7 @@ const Anime = () => {
             </p>
 
             <div className="mt-4 md:mt-8 w-full flex md:flex-row flex-col items-center gap-2">
-                <input
-                    type="text"
-                    placeholder="search by title ..."
-                    className="bg-background border p-3 border-input w-full focus:outline focus:outline-primary placeholder:text-muted-foreground/70 "
-                />
+                <SearchAnimeInput query={query} setQuery={setQuery} />
                 <div className="flex w-full md:flex-row flex-col gap-2">
                     <select className="bg-background uppercase border p-3 border-input focus:outline focus:outline-primary">
                         <option value="" className="text-muted-foreground/70">
@@ -67,6 +79,15 @@ const Anime = () => {
                             />
                         ))}
                     </div>
+                )}
+
+                {!allAnimeLoading && allAnime.length === 0 && (
+                    <EmptyState
+                        icon={
+                            <Search className="w-12 h-12 stroke-foreground" />
+                        }
+                        message="No anime found."
+                    />
                 )}
             </section>
         </div>

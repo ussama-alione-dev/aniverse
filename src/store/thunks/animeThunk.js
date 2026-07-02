@@ -3,9 +3,9 @@ import api from "../../api/axios";
 
 export const getAllAnime = createAsyncThunk(
     "anime/getAllAnime",
-    async (_, thunkAPI) => {
+    async (q, thunkAPI) => {
         try {
-            const response = await api.get("/anime");
+            const response = await api.get(`/anime?q=${q}`);
             console.log("All Anime Response:", response.data.data); // Log the response data for debugging
             return response.data.data;
         } catch (error) {
