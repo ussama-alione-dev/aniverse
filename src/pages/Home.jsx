@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 
 import AnimeCard from "../ui/components/AnimeCard";
 import ErrorMessage from "../ui/components/ErrorMessage";
+import AnimeGridSkeleton from "../ui/components/AnimeGridSkeleton";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -61,7 +62,7 @@ const Home = () => {
                     </Link>
                 </div>
                 {TopAnimeLoading ? (
-                    <p>Loading trending anime...</p>
+                    <AnimeGridSkeleton count={6} />
                 ) : TopAnimeError ? (
                     <ErrorMessage
                         message={
@@ -92,7 +93,7 @@ const Home = () => {
                     </span>
                 </div>
                 {SeasonalAnimeLoading ? (
-                    <p>Loading seasonal anime...</p>
+                    <AnimeGridSkeleton count={6} />
                 ) : SeasonalAnimeError ? (
                     <ErrorMessage
                         message={

@@ -11,6 +11,7 @@ import EmptyState from "../ui/components/EmptyState";
 import { Search } from "lucide-react";
 import GenreSelect from "../ui/components/GenreSelect";
 import TypeSelect from "../ui/components/TypeSelect";
+import AnimeGridSkeleton from "../ui/components/AnimeGridSkeleton";
 
 const Anime = () => {
     const dispatch = useDispatch();
@@ -58,9 +59,7 @@ const Anime = () => {
 
             <section>
                 {allAnimeLoading ? (
-                    <div className="w-full h-96 flex items-center justify-center">
-                        <p className="text-muted-foreground/70">Loading...</p>
-                    </div>
+                    <AnimeGridSkeleton />
                 ) : allAnimeError ? (
                     <ErrorMessage message={allAnimeError.message} />
                 ) : (
