@@ -1,9 +1,17 @@
 import React from "react";
 import Button from "./Button";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromFavorite } from "../../store/thunks/favoritesThunk";
 
 const FavoriteCard = ({ favorite }) => {
+    const dispatch = useDispatch();
+
+    const handleRemoveFromFavorites = () => {
+        dispatch(removeFromFavorite(favorite.id));
+    };
+
     return (
-        <div key={favorite.animeId} className="flex h-full flex-col">
+        <div key={favorite.id} className="flex h-full flex-col">
             <div className="aspect-2/3 overflow-hidden border border-border">
                 <img
                     src={favorite.image}
@@ -17,7 +25,11 @@ const FavoriteCard = ({ favorite }) => {
                     {favorite.title}
                 </p>
 
-                <Button variant="ghost" className="mt-auto w-full text-xs">
+                <Button
+                    onClick={handleRemoveFromFavorites}
+                    variant="ghost"
+                    className="mt-auto w-full text-xs"
+                >
                     Remove from Favorites
                 </Button>
             </div>

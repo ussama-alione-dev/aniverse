@@ -1,14 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addToFavorite, fetchFavorites } from "../thunks/favoritesThunk";
+import {
+    addToFavorite,
+    fetchFavorites,
+    removeFromFavorite,
+} from "../thunks/favoritesThunk";
 
 const initialState = {
     favorites: [],
 
     AddToFavoritesloading: false,
     fetchFavoritesLoading: false,
+    removeFromFavoritesLoading: false,
 
     AddToFavoriteserror: null,
     fetchFavoritesError: null,
+    removeFromFavoritesError: null,
 };
 
 const favoriteSlice = createSlice({
@@ -42,6 +48,22 @@ const favoriteSlice = createSlice({
             .addCase(fetchFavorites.rejected, (state, action) => {
                 state.fetchFavoritesLoading = false;
                 state.fetchFavoritesError = action.payload;
+            });
+
+        // remove from favorites
+        builder
+            .addCase(removeFromFavorite.pending, (state) => {
+                state.removeFromFavoritesLoading = true;
+            })
+            .addCase(removeFromFavorite.fulfilled, (state, action) => {
+                state.removeFromFavoritesLoading = false;
+                state.favorites = state.favorites.filter(
+                    (favorite) => favorite.animeId !== action.payload,
+                );
+            })
+            .addCase(removeFromFavorite.rejected, (state, action) => {
+                state.removeFromFavoritesLoading = false;
+                state.removeFromFavoritesError = action.payload;
             });
     },
 });

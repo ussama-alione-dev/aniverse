@@ -6,6 +6,9 @@ import { fetchFavorites } from "../store/thunks/favoritesThunk";
 
 import FavoriteCard from "../ui/components/FavoriteCard";
 import FavoritesSkeleton from "../ui/components/FavoritesSkeleton";
+import ErrorMessage from "../ui/components/ErrorMessage";
+import EmptyState from "../ui/components/EmptyState";
+import { Star } from "lucide-react";
 
 const Favorites = () => {
     const { favorites, fetchFavoritesLoading, fetchFavoritesError } =
@@ -27,6 +30,13 @@ const Favorites = () => {
 
             {fetchFavoritesLoading ? (
                 <FavoritesSkeleton count={12} />
+            ) : favorites.length === 0 ? (
+                <div className="w-full h-96 flex items-center justify-center">
+                    <EmptyState
+                        icon={<Star />}
+                        message="You have no favorites yet.Start exploring and add your favorite anime"
+                    />
+                </div>
             ) : (
                 <div className="mt-4 md:mt-8 grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
                     {favorites.map((favorite) => (
@@ -36,6 +46,10 @@ const Favorites = () => {
                         />
                     ))}
                 </div>
+            )}
+
+            {fetchFavoritesError && (
+                <ErrorMessage message={fetchFavoritesError.message} />
             )}
         </div>
     );
