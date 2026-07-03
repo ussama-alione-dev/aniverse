@@ -1,5 +1,15 @@
 {
-  "favorites": [],
+  "favorites": [
+    {
+      "animeId": 26,
+      "title": "Texhnolyze",
+      "image": "https://cdn.myanimelist.net/images/anime/1027/131977l.webp",
+      "score": 7.76,
+      "type": "TV",
+      "episodes": 22,
+      "id": "6eM0TXK4rUc"
+    }
+  ],
   "watchlist": [],
   "ratings": [],
   "notes": [],
